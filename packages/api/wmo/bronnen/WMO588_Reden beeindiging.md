@@ -1,18 +1,31 @@
-# WMO588: Reden beëindiging
+# WMO588: Reden beeindiging
 
-**Definitie:**  
+## Definitie  
 De reden van beeindiging van de Wmo-ondersteuning bij een client.
-
 - Als Reden wijzing toewijzing <> nvt dat wordt de code gebruikt nav een redenwijziging toewijzing
 - Als Initiatief aanbieder = ja, dan kan de code op initiatief van de aanbieder worden gebruikt.
 - Bijvoorbeeld : code 02, kan na ontvangst een gewijzigde toewijzing met reden wijziging toewijzing 02 gebruikt worden, maar ook als de aanbieder zelf constateert dat de client is overleden.
 
+## Metadata
+- **ID:** WMO588 
+- **Naam:** Reden beeindiging 
+- **Status:** Productie
+- **ELement:** LDT_RedenBeeindiging
+- **Type bestand:**: Codelijst
+- **Auteur:** Zorginstituut Nederland  
+- **Standaard:** iWmo 3.2  
+- **Bron:** https://informatiemodel.istandaarden.nl/informatiemodel/iwmo/3.2/codelijsten/wmo588/  
+- **AI-agent:** Wmo-agent  
+
+## Gebruik in berichten
+- WMO307
+- WMO308
 ---
 
 ## Codelijst
 
 | Code | Omschrijving                                        | Gebruik  | Reden wijziging toewijzing   | Initiatief aanbieder   |
-|:-----:|:----------------------------------------------------|:---------|:-----------------------------|:-----------------------|
+|:-----:|:---------------------------------------------------|:---------|:-----------------------------|:-----------------------|
 | 02 | Overlijden                                          | Indien een client is overleden, zal deze code Reden Beeindiging worden gebruikt. | 02 | ja |
 | 19 | Levering volgens plan beeindigd                     | Enige wijzigingen in het plan zijn normaal. Het is niet wenselijk om te rigide vast te houden aan een vooropgesteld plan. Als je met elkaar, zoals gepland, het traject doorloopt en niet voortijdig stopt, is het traject volgens plan afgesloten. | nvt | ja |
 | 20 | Levering is tijdelijk beeindigd                     | Indien een client tijdelijk geen zorg kan ontvangen, maar de verwachting is dat deze zorg binnen redelijke termijn wel kan worden vervolgd. Bv. Client is opgenomen in een ziekenhuis. | nvt | ja |

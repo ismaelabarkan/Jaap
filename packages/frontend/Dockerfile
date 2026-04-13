@@ -9,7 +9,7 @@ COPY packages/frontend ./packages/frontend
 COPY packages/api/package.json ./packages/api/package.json
 
 # Stap 2: Install (werkt nu native op Azure AMD64)
-RUN bun install --no-optional || bun install
+RUN apk add --no-cache python3 make g++ && bun install --no-optional || bun install
 
 # Stap 3: Build frontend
 WORKDIR /app/packages/frontend

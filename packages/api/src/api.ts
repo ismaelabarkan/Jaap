@@ -169,6 +169,7 @@ export const api = new Hono<{ Variables: Variables }>()
 				"/api/v1/picks",
 				"/api/v1/responses",
 				"/api/v1/feedback",
+				"/api/v1/agents",
 			],
 			authMiddleware,
 		),
@@ -206,7 +207,7 @@ export const api = new Hono<{ Variables: Variables }>()
 	.post("question", vValidator("json", oneOffMessageSchema), async (c) => {
 		const { q, agent = "jw" } = c.req.valid("json");
 
-		const response = await agents[agent].query(q, [], db);
+		const response = await (await agents[agent]()).query(q, [], db);
 
 		return c.json({ response: response.message.content });
 	})
@@ -270,13 +271,13 @@ export const api = new Hono<{ Variables: Variables }>()
 					} while (modelFirst === modelSecond);
 
 					const [responseFirst, responseSecond] = await Promise.all([
-						agents[agent].query(
+						(await agents[agent]()).query(
 							inputText,
 							conversation.messages as ChatMessage[],
 							db,
 							modelFirst,
 						),
-						agents[agent].query(
+						(await agents[agent]()).query(
 							inputText,
 							conversation.messages as ChatMessage[],
 							db,
@@ -292,7 +293,7 @@ export const api = new Hono<{ Variables: Variables }>()
 					return c.json([responseFirst.message, responseSecond.message]);
 				}
 
-				const response = await agents[agent].query(
+				const response = await (await agents[agent]()).query(
 					inputText,
 					conversation.messages as ChatMessage[],
 					db,
@@ -339,6 +340,15 @@ export const api = new Hono<{ Variables: Variables }>()
 		});
 
 		return c.json({ success: true });
+	})
+
+	.get("agents", (c) => {
+		return c.json({
+			agents: Object.keys(agents).map((key) => ({
+				id: key,
+				label: key.toUpperCase(),
+			})),
+		});
 	})
 
 	.get("models", (c) => {

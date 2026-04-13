@@ -5,7 +5,6 @@ import { SimpleDirectoryReader } from "@llamaindex/readers/directory";
 import {
 	type ChatMessage,
 	ContextChatEngine,
-	DocStoreStrategy,
 	JinaAIReranker,
 	type LLM,
 	Settings,
@@ -23,20 +22,7 @@ Settings.chunkOverlap = 100;
 
 const qdrantUri = getEnvOrThrow("QDRANT_URI");
 
-// Qdrant URL configuration for different environments
 function getQdrantConfig(uri: string) {
-	// For localhost, use full URI with port (combined container setup)
-	if (uri.includes('localhost') || uri.includes('127.0.0.1')) {
-		return { url: uri };
-	}
-
-	// For Azure internal ingress, strip port (ingress doesn't support explicit ports)
-	const urlWithoutPort = uri.replace(/:6333$/, '');
-	if (uri.includes('.internal.') || uri.includes('.azurecontainerapps.io')) {
-		return { url: urlWithoutPort };
-	}
-
-	// For other URLs, use as-is
 	return { url: uri };
 }
 
@@ -115,24 +101,18 @@ class Agent {
 		db: IDB,
 		model?: keyof typeof llms,
 	) {
-		// Use provided model or fall back to agent's default
 		const actualModel = model || this.model;
-		
+
 		console.log("Creating chat engine...");
 		const retriever = this.index.asRetriever({
-			similarityTopK: 100,
+			similarityTopK: 10,
 		});
 
 		const llm = llms[actualModel]();
 
 		const chatEngine = new ContextChatEngine({
 			retriever,
-			nodePostprocessors: [
-				new JinaAIReranker({
-					model: "jina-reranker-v2-base-multilingual",
-					topN: 10,
-				}),
-			],
+			nodePostprocessors: [],
 			systemPrompt: this.prompt,
 			chatModel: llm,
 		});
@@ -146,7 +126,6 @@ class Agent {
 		});
 
 		const endTime = Date.now();
-
 		const responseTime = endTime - startTime;
 
 		console.log("Model responded", actualModel, responseTime);
@@ -167,7 +146,6 @@ class Agent {
 	}
 }
 
-// Agent configurations
 const agentConfigs = {
 	jw: {
 		collectionName: "jaapjunior",
@@ -191,7 +169,6 @@ const agentConfigs = {
 
 const agentCache: Partial<Record<keyof typeof agentConfigs, Promise<Agent>>> = {};
 
-// Lazy-load function to get agents on-demand
 async function getAgent(name: keyof typeof agentConfigs): Promise<Agent> {
 	if (!agentCache[name]) {
 		console.log(`🚀 Initializing ${name.toUpperCase()} agent...`);
@@ -200,7 +177,6 @@ async function getAgent(name: keyof typeof agentConfigs): Promise<Agent> {
 	return agentCache[name]!;
 }
 
-// Export agents as callable functions for lazy initialization
 export const agents = {
 	jw: () => getAgent("jw"),
 	wmo: () => getAgent("wmo"),

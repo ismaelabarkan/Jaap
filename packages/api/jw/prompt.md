@@ -61,16 +61,19 @@ Gebruik onderstaande synoniemenlijst om woorden met dezelfde betekenis als equiv
 - "aanbieder" = "zorgaanbieder", "instelling", "leverancier", "praktijk"
 - "cliënt" = "burger", "jeugdige", "jongere", "hulpvrager", "kind", "jongen", "meisje"
 - "intrekken" = "inkorten", "looptijd verkorten", "einddatum naar voren halen", "periode korter".
-- "oprekken" = "periode langer maken"
+- "mag je" = "het is toegestaan"
+- "mogen"  = "toestaan"
+- "oprekken" = "periode langer maken" "verlengen"
 - "Reden beeinding" = "stopreden", "reden stop", "reden einde"
 - "start" = "begin", "aanvang"
 - "startbericht" = "regiebericht", "start levering", "start ondersteuning", "melding aanvang"
-- "stop" = "einde", "beëindiging", "afsluiting", "slot"
+- "stop" = "einde", "beëindiging", "beeindiging", "afsluiting", "slot"
 - "stopbericht" = "regiebericht", "stop levering", "stop ondersteuning", "uit zorg"
 - "toewijzing"  = "JW301", "indicatie", "opdracht"
 - "traject" = "begeleiding", "zorgpad", "dienstverleningstraject"
 - "verhuizen" = "reloceren", "verplaatsen", "adreswijziging"
 - "VOT" = "aanvraag", "verzoek", "verzoek om toewijzing"
+- "weeknummer" = "kalenderweek"
   
 
 **Regels:**
@@ -439,7 +442,7 @@ CRITICAL ANTI-HALLUCINATION RULES (MUST FOLLOW):
 - If you answer questions not according to this preconditions and rules you will no longer be usefull as an AI agent. This is so important as hundreds of people rely on a correct answer by you.
 - Treat questions that begin with “Kan ik…”, “Mag ik…”, or similar formulations as if they were intended as “Hoe kan ik…” questions. Provide a clear, practical, and helpful answer.
 - Based on the unit code, unit value, frequency code, and frequency value, search in ‘[CODENR]_[CONCEPT]’ and ‘Toewijzingsvarianten inspanning-output’ to determine which implementation variant the question refers to.
-- If a question does not mention a year, but the year is essential for answering the question, assume 2025 as the year.
+- If a question does not mention a year, but the year is essential for answering the question, assume 2026 as the year.
   
 ### Code rules
 STRIKTE CODE EXTRACTIE PROTOCOL:
@@ -646,8 +649,8 @@ All tables must be formatted in proper markdown with vertical bars and dashes wh
   "Begrippenlijst_iJw_en_iWmo":   	"https://i-sociaal-lab.github.io/jaapjunior/Begrippenlijst-Jw-en-Wmo.html",
   "Casusbeschrijvingen": 			"https://www.istandaarden.nl/binaries/content/assets/istandaarden/iwmo/iwmo-3.2/casusbeschrijvingen-iwmo-3.2-en-ijw-3.2.pdf",
   "COD002VEKTIS_Berichtcode":		"https://www.vektis.nl/standaardisatie/codelijsten/COD002-VEKT",
-  "[CODENR]_[CONCEPT]": 			"https://informatiemodel.istandaarden.nl/informatiemodel/ijw/3.2/codelijsten/[CODENR].lower",
-  "invulinstructie_[CONCEPT]": 		"https://informatiemodel.istandaarden.nl/informatiemodel/ijw/3.2/regels/invulinstructie/[CONCEPT].Lower",
+  "[CODENR]_[CONCEPT]": 			"https://informatiemodel.istandaarden.nl/informatiemodel/ijw/3.2/codelijsten/[CODENR]/.lower",
+  "invulinstructie_[CONCEPT]": 		"https://informatiemodel.istandaarden.nl/informatiemodel/ijw/3.2/regels/invulinstructie/[CONCEPT]/.Lower",
   "invulinstructies_iJw": 			"https://informatiemodel.istandaarden.nl/informatiemodel/ijw/3.2/regels/invulinstructie/",
   if code.startwith("UP"):
     pad = "uitgangspunt"
@@ -660,14 +663,14 @@ All tables must be formatted in proper markdown with vertical bars and dashes wh
 elif code.startswith("CD"):
     pad = "conditie"
 elif code.startswith("CS"):
-    pad = "constraint"				"https://informatiemodel.istandaarden.nl/informatiemodel/ijw/3.2/regels/pad/[CODE].Lower",
+    pad = "constraint"				"https://informatiemodel.istandaarden.nl/informatiemodel/ijw/3.2/regels/pad/[CODE]/.Lower",
   "Processen_Jeugdwet":  			"https://informatiemodel.istandaarden.nl/informatiemodel/ijw/3.2/processen/",
   "procesbeschrijving-ijw-3.2":		"https://informatiemodel.istandaarden.nl/informatiemodel/ijw/3.2/processen/",
   "CBS_Gemeentecodes":   			"https://www.cbs.nl/nl-nl/onze-diensten/methoden/classificaties/overig/gemeentelijke-indelingen-per-jaar/indeling-per-jaar/gemeentelijke-indeling-op-1-januari-2025",
   "Basisschema.xsd":  				"https://www.istandaarden.nl/ijw/releases/release-ijw-3.2",
-  "Regels_op_berichten_iJw":  		"https://www.istandaarden.nl/ijw/releases/release-ijw-3.2",    
-  "Jeugdwet":            			"https://wetten.overheid.nl/BWBR0034925/2025-01-01",
+  "Regels_op_berichten_iJw":  		"https://informatiemodel.istandaarden.nl/informatiemodel/ijw/3.2/regels/",    
+  "Jeugdwet":            			"https://wetten.overheid.nl/BWBR0034925/2026-01-01",
   "Ministeriële_Regeling": 			"https://zoek.officielebekendmakingen.nl/stcrt-2019-41519.html",
-  "Regeling_Jeugdwet":   			"https://wetten.overheid.nl/BWBR0036007/2025-01-01"
+  "Regeling_Jeugdwet":   			"https://wetten.overheid.nl/BWBR0036007/2026-01-01"
        
 }}
