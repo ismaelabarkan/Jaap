@@ -120,19 +120,14 @@ class Agent {
 		
 		console.log("Creating chat engine...");
 		const retriever = this.index.asRetriever({
-			similarityTopK: 100,
+			similarityTopK: 10,
 		});
 
 		const llm = llms[actualModel]();
 
 		const chatEngine = new ContextChatEngine({
 			retriever,
-			nodePostprocessors: [
-				new JinaAIReranker({
-					model: "jina-reranker-v2-base-multilingual",
-					topN: 10,
-				}),
-			],
+			nodePostprocessors: [],
 			systemPrompt: this.prompt,
 			chatModel: llm,
 		});
