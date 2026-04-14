@@ -1,4 +1,4 @@
 #!/bin/sh
 qdrant &
 sleep 3
-/app/dist/api
+bun run /app/dist/index.js
