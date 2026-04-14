@@ -26,5 +26,6 @@ ENV NODE_ENV=production
 ENV PORT=3000
 EXPOSE 3000
 COPY packages/api/start.sh /start.sh
+RUN sed -i "s/\r//" /start.sh
 RUN chmod +x /start.sh
 CMD ["/start.sh"]
