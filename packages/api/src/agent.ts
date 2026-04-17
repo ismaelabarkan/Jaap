@@ -125,13 +125,17 @@ class Agent {
 
 		const llm = llms[actualModel]();
 
+		const reranker = new JinaAIReranker({
+			model: "jina-reranker-v2-base-multilingual",
+			topN: 10,
+		});
+
 		const chatEngine = new ContextChatEngine({
 			retriever,
 			nodePostprocessors: [
-				new JinaAIReranker({
-					model: "jina-reranker-v2-base-multilingual",
-					topN: 10,
-				}),
+				{
+					postprocessNodes: reranker.postprocessNodes.bind(reranker),
+				},
 			],
 			systemPrompt: this.prompt,
 			chatModel: llm,
