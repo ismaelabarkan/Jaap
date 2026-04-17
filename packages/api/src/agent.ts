@@ -120,7 +120,7 @@ class Agent {
 		
 		console.log("Creating chat engine...");
 		const retriever = this.index.asRetriever({
-			similarityTopK: 100,
+			similarityTopK: 50,
 		});
 
 		const llm = llms[actualModel]();
