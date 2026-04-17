@@ -6,7 +6,6 @@ import {
 	type ChatMessage,
 	ContextChatEngine,
 	DocStoreStrategy,
-	JinaAIReranker,
 	type LLM,
 	Settings,
 	storageContextFromDefaults,
@@ -22,6 +21,7 @@ Settings.embedModel = new OpenAIEmbedding({
 Settings.chunkOverlap = 100;
 
 const qdrantUri = getEnvOrThrow("QDRANT_URI");
+const jinaApiKey = getEnvOrThrow("JINAAI_API_KEY");
 
 // Qdrant URL configuration for different environments
 function getQdrantConfig(uri: string) {
@@ -38,6 +38,53 @@ function getQdrantConfig(uri: string) {
 
 	// For other URLs, use as-is
 	return { url: uri };
+}
+
+// Custom Jina reranker — avoids llamaindex class binding issues
+function createJinaReranker(topN: number, model: string) {
+	return {
+		async postprocessNodes(nodes: any[], query: any) {
+			if (nodes.length === 0) return [];
+			if (query === undefined) {
+				throw new Error("Reranker requires a query");
+			}
+
+			const queryText =
+				typeof query === "string"
+					? query
+					: (query?.query ?? String(query));
+
+			const documents = nodes.map((n: any) => n.node.getContent("ALL"));
+
+			const response = await fetch("https://api.jina.ai/v1/rerank", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `Bearer ${jinaApiKey}`,
+				},
+				body: JSON.stringify({
+					model,
+					query: queryText,
+					documents,
+					top_n: topN,
+				}),
+			});
+
+			if (!response.ok) {
+				const errText = await response.text();
+				throw new Error(`Jina rerank failed: ${response.status} ${errText}`);
+			}
+
+			const json = (await response.json()) as {
+				results: Array<{ index: number; relevance_score: number }>;
+			};
+
+			return json.results.map((r) => ({
+				node: nodes[r.index].node,
+				score: r.relevance_score,
+			}));
+		},
+	};
 }
 
 async function createIndex(collectionName: string, dataDir = "./jw") {
@@ -117,7 +164,7 @@ class Agent {
 	) {
 		// Use provided model or fall back to agent's default
 		const actualModel = model || this.model;
-		
+
 		console.log("Creating chat engine...");
 		const retriever = this.index.asRetriever({
 			similarityTopK: 50,
@@ -125,18 +172,11 @@ class Agent {
 
 		const llm = llms[actualModel]();
 
-		const reranker = new JinaAIReranker({
-			model: "jina-reranker-v2-base-multilingual",
-			topN: 10,
-		});
+		const reranker = createJinaReranker(10, "jina-reranker-v2-base-multilingual");
 
 		const chatEngine = new ContextChatEngine({
 			retriever,
-			nodePostprocessors: [
-				{
-					postprocessNodes: reranker.postprocessNodes.bind(reranker),
-				},
-			],
+			nodePostprocessors: [reranker as any],
 			systemPrompt: this.prompt,
 			chatModel: llm,
 		});
