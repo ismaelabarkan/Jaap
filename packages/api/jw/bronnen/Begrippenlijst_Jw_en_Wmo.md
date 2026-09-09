@@ -26,7 +26,7 @@ meest recente berichten in het berichtenverkeer die bepalen wat de situatie van 
 
 ### actuele toewijzing
 
-toewijzing die op of na de huidige datum geldig is of waarvan de ingangsdatum in de toekomst ligt
+Actuele toewijzingen zijn toewijzingen waarvan de einddatum leeg is of waarvoor geldt dat de einddatum op of na de huidige datum ligt.
 
 ### acute zorg
 
@@ -144,6 +144,55 @@ is wonen in een accommodatie van een instelling met veel toezicht en begeleiding
 ### beschikking
 
 besluit van een bestuursorgaan van de overheid gericht op een bepaalde persoon of rechtspersoon, zoals besluiten van de gemeente waarin staat of een persoon recht heeft op Wmo-ondersteuning of jeugdhulp en wanneer dat het geval is, vermeld staat hoeveel ondersteuning deze persoon krijgt en voor welke periode.
+
+Een verleningsbeschikking van een gemeente is een officieel besluit waarin de gemeente vastlegt dat iemand recht krijgt op een voorziening, ondersteuning, vergunning of subsidie.
+
+Het woord bestaat uit twee delen:
+
+* **Verlening** = iets wordt toegekend of toegestaan
+* **Beschikking** = een formeel bestuursrechtelijk besluit van een overheidsorganisatie
+
+Binnen het sociaal domein (zoals Wmo en Jeugdwet) betekent een verleningsbeschikking meestal dat de gemeente bepaalt:
+
+* welke ondersteuning iemand krijgt;
+* vanaf wanneer;
+* voor welke periode;
+* onder welke voorwaarden;
+* en soms hoeveel budget of uren beschikbaar zijn.
+
+### Voorbeelden
+
+Een gemeente kan een verleningsbeschikking afgeven voor:
+
+* huishoudelijke hulp via de Wmo;
+* begeleiding of dagbesteding;
+* een persoonsgebonden budget (pgb);
+* jeugdhulp;
+* een scootmobiel of woningaanpassing;
+* bijzondere bijstand;
+* subsidies of vergunningen.
+
+### Wat staat er meestal in?
+
+Een verleningsbeschikking bevat vaak:
+
+* persoonsgegevens van de inwoner;
+* het besluit van de gemeente;
+* de wettelijke grondslag;
+* de ingangsdatum en einddatum;
+* omvang van de voorziening;
+* motivatie van het besluit;
+* bezwaar- en beroepsmogelijkheden.
+
+### Verschil met andere begrippen
+
+* **Aanvraag** → verzoek van de inwoner
+* **Verleningsbeschikking** → gemeente kent iets toe
+* **Vaststellingsbeschikking** → definitieve afrekening of bevestiging achteraf
+* **Afwijzingsbeschikking** → aanvraag wordt geweigerd
+
+Binnen de iWmo/iJw-keten zie je het begrip vaak terug als juridische basis voor een toewijzing of zorginzet. Een zorgaanbieder ontvangt meestal niet de beschikking zelf, maar wel een afgeleid administratief bericht zoals een toewijzingsbericht.
+
 
 ### bestand
 
@@ -279,6 +328,10 @@ Bericht met verwerkingsinformatie voor declaratie Jeugdhulp. In dit bericht staa
 
 een van de vier deelprocessen uit het primair proces van de iStandaarden; Wanneer de aanbieder vaststelt dat de declaratieperiode is afgelopen of een declaratie is afgekeurd stuurt de aanbieder een declaratie naar de gemeente. De aanbieder stuurt hiervoor een declaratiebericht en geeft in dit bericht aan welke prestaties, in welke declaratieperiode en voor welk totaal ingediend bedrag worden gedeclareerd. De gehele declaratie krijgt een declaratienummer als unieke identificatie van de declaratie. Dit declaratienummer dient ook om het antwoordbericht volgend op de declaratie aan het declaratiebericht te kunnen koppelen. In het declaratie antwoordbericht geeft de gemeente terugkoppeling aan de aanbieder of de prestaties correct zijn ingediend en wat het totaal toegekend bedrag is.
 
+### DMO
+
+Directie Maatschappelijke Ondersteuning. Een afdeling die helpt bij zorgtaken rondom de Wet maatschappelijke ondersteuning (Wmo)
+
 ### eenheid of eenheden
 
 verwijst naar codelijst Eenheid. Deze code wordt gebruikt om aan te geven in welke eenheid de omvang van de geleverde of toe te wijzen jeugdhulp wordt uitgedrukt. Deze code wordt toegepast in een toewijzingbericht (JW301), in een verzoek om toewijzing (JW315), in een verzoek om wijziging (JW317) en in declaratieberichten (JW323).
@@ -317,7 +370,7 @@ vanuit de Wmo 2015 wordt gesproken over gebruikelijke hulp en dan gaat het om zo
 
 ### Gecertificeerde instelling (GI)
 
-dit is een rechtspersoon die een kinderbeschermingsmaatregel of jeugdreclassering uitvoert. Deze instellingen moeten in het bezit zijn van een (voorlopig) certificaat. Als de rechter beslist dat er een kinderbeschermingsmaatregel komt, zorgt een gecertificeerde instelling (GI) voor de uitvoering daarvan. Er bestaan verschillende gecertificeerde instellingen, met ieder een eigen naam. Bij een ondertoezichtstelling (OTS) komt er een gezinsvoogd die samen met het gezin een plan maakt.
+dit is een rechtspersoon die een kinderbeschermingsmaatregel of jeugdreclassering uitvoert. Deze instellingen moeten in het bezit zijn van een (voorlopig) certificaat van de overheid. Als de rechter beslist dat er een kinderbeschermingsmaatregel komt, zorgt een gecertificeerde instelling (GI) voor de uitvoering daarvan. Er bestaan verschillende gecertificeerde instellingen, met ieder een eigen naam. Bij een ondertoezichtstelling (OTS) komt er een gezinsvoogd die samen met het gezin een plan maakt.
 
 ### geestelijke gezondheidszorg
 
@@ -768,7 +821,8 @@ Bericht voor het melden van de stop van levering van Jeugdhulp. Dit bericht word
 
 ### De StUF-standaarden
 
-Worden gebruik voor het elektronisch uitwisselen van data tussen applicaties van overheidsorganisaties. Bijvoorbeeld voor het uitwisselen van zaakgegevens en data uit basisregistraties. StUF-standaarden zijn gebaseerd op het Standaard Uitwisseling Formaat (StUF). StUF bevat zelf geen berichten maar de bouwstenen en richtlijnen waarmee berichtstandaarden zijn te maken. StUF is beschreven in XML en gebaseerd op geaccepteerde internetstandaarden. In het sociaaldomein waar berichtenverkeer plaatsvindt tussen gemeenten en aanbieders wordt en StUF-envelop gebruikt.
+Worden gebruik voor het elektronisch uitwisselen van data tussen applicaties van overheidsorganisaties. Bijvoorbeeld voor het uitwisselen van zaakgegevens en data uit basisregistraties. StUF-standaarden zijn gebaseerd op het Standaard Uitwisseling Formaat (StUF). StUF bevat zelf geen berichten maar de bouwstenen en richtlijnen waarmee berichtstandaarden zijn te maken. StUF is beschreven in XML en gebaseerd op geaccepteerde internetstandaarden. In het sociaaldomein waar berichtenverkeer plaatsvindt tussen gemeenten en aanbieders wordt de StUF-envelop gebruikt.
+bron: https://vng-realisatie.github.io/StUF-koppelvlak-iWmo-iJw/
 
 ### SVB
 
@@ -801,6 +855,18 @@ een van de vier deelprocessen uit het primair proces van de iStandaarden; Voor W
 ### Toewijzing
 
 synoniem voor Toewijzing Jeugdhulp, JW301.
+
+### toewijzing Jeugdhulp
+
+Opdracht van een gemeente aan een zorgaanbieder om voor een bepaalde periode bepaalde zorg te leveren aan een cliënt. Dit bericht is een rechtmatigheidsbericht dat de aanbieder het recht geeft zorg te leveren en deze zorg te declareren bij de gemeente. JW301.
+
+### toewijzing WMO
+
+Opdracht van een gemeente aan een zorgaanbieder om voor een bepaalde periode bepaalde zorg te leveren aan een cliënt. Dit bericht is een rechtmatigheidsbericht dat de aanbieder het recht geeft zorg te leveren en deze zorg te declareren bij de gemeente. WMO301.
+
+### toewijzingsbericht
+
+zie toewijzing Jeugdhulp zie toewijzing WMO, heenbericht dat een gemeente toestuurt aan zorgaanbieder.
 
 ### treeknormen
 
@@ -846,6 +912,9 @@ De Jeugdwet kent geen formele term "verlengde jeugdwet". Wel zijn er bepalingen 
 
 van een toewijzing is het oprekken van de einddatum
 
+### Verleningsbeschikking
+zie Beschikking
+
 ### Verwijsindex Productcodes Wmo en Jeugdwet
 
 Overzicht per gemeente van de productcodes voor de Wmo en de productcodes voor de Jeugdwet die tot 1 januari 2016 bij gemeenten in gebruik waren; de module is omgezet naar Excel-bestanden en per 1 januari 2016 is de standaardproductcodelijst  beschikbaar. Deze heten Productcodelijst JW en voor de Productcodelijst WMO.
@@ -860,7 +929,7 @@ dit is een bericht voor het aanvragen van een toewijzing voor Jeugdhulp. Dit ber
 
 ### Verzoek om wijziging Jeugdhulp
 
-Dit is een bericht voor Verzoek om wijziging Jeugdhulp. Dit bericht wordt ook wel VOW of wijzigingsbericht genoemd. Een aanbieder stuurt dit bericht naar een gemeente om een wijziging in de toekomstige zorgvraag van een client door te geven. Het bericht dat hiervoor wordt gebruikt is JW317. Een gemeente keurt dit bericht af met een JW319 antwoordbericht of neemt het verzoek in onderzoek door een JW319 antwoordbericht te sturen of keurt het verzoek in zijn geheel goed door een gewijzigd toewijzingsbericht te sturen.
+Dit is een bericht voor Verzoek om wijziging Jeugdhulp. Dit bericht wordt ook wel VOW of wijzigingsbericht genoemd. Een aanbieder stuurt dit bericht naar een gemeente om een wijziging in de toekomstige zorgvraag van een client door te geven. Het bericht dat hiervoor wordt gebruikt is JW317. Een gemeente wijst dit bericht af met een JW319 antwoordbericht of neemt het verzoek in onderzoek door een JW319 antwoordbericht te sturen of wijst het verzoek in zijn geheel toe door een gewijzigd toewijzingsbericht te sturen.
 
 ### VOT
 
@@ -890,10 +959,6 @@ Periodes die iemand ergens op moet wachten, bijvoorbeeld de tijd die zit tussen 
 
 Wet bescherming persoonsgegevens; per 25 mei 2018 opgegaan in de Algemene Verordening Gegevensbescherming; zie: Algemene Verordening Gegevensbescherming (AVG).
 
-### Wbsn-z
-
-Wet gebruik BSN in de zorg; regelt dat zorgaanbieders, zorgverzekeraars en indicatieorganen het burgerservicenummer moeten opnemen in hun administratie en gebruiken bij de uitwisseling van gegevens over hun patiënten (persoonsgegevens, medischinhoudelijke en (financieel-)administratieve gegevens); inwerkingtreding 1 juni 2008.
-
 ### werkdag
 
 Een werkdag is een dag waarop de meeste mensen die in dienst zijn, werken. In de meeste culturen wordt dit van maandag tot en met vrijdag beschouwd, met uitzondering van erkende feestdagen.
@@ -901,10 +966,6 @@ Een werkdag is een dag waarop de meeste mensen die in dienst zijn, werken. In de
 ### Wet bescherming persoonsgegevens
 
 zie: Algemene Verordening Gegevensbescherming
-
-### Wet gebruik BSN in de zorg
-
-zie: Wbsn-z
 
 ### Wettelijke domeinen
 
@@ -1013,18 +1074,6 @@ Producten in de vorm van activiteiten, diensten en/of verrichtingen binnen de zo
 ### zorgprofielen
 
 Beschrijvingen van kenmerken, problemen en achtergronden van de problemen van doelgroepen van een interventie of voorziening, met als doel passende zorg voor die betreffende doelgroep(en) te ontwikkelen en om met ketenpartners, financiers, gemeenten enz. goed onderbouwd te kunnen communiceren over doelgroep, aanbod en financiering; binnen de Wlz: beschrijvingen van de aard, inhoud en globale omvang van de zorg die iemand nodig heeft; in het indicatiebesluit van het CIZ wordt het zorgprofiel aangegeven waartoe de cliënt behoort, zoals VG (sector verstandelijk gehandicapt) Wonen met begeleiding en intensieve zorg; afspraken over de precieze invulling van de benodigde zorg maakt de cliënt met de zorgaanbieder in het zorgplan; zie: klantprofielen.
-
-### toewijzing Jeugdhulp
-
-Opdracht van een gemeente aan een zorgaanbieder om voor een bepaalde periode bepaalde zorg te leveren aan een cliënt. Dit bericht is een rechtmatigheidsbericht dat de aanbieder het recht geeft zorg te leveren en deze zorg te declareren bij de gemeente. JW301.
-
-### toewijzing WMO
-
-Opdracht van een gemeente aan een zorgaanbieder om voor een bepaalde periode bepaalde zorg te leveren aan een cliënt. Dit bericht is een rechtmatigheidsbericht dat de aanbieder het recht geeft zorg te leveren en deze zorg te declareren bij de gemeente. WMO301.
-
-### toewijzingsbericht
-
-zie toewijzing Jeugdhulp zie toewijzing WMO, heenbericht dat een gemeente toestuurt aan zorgaanbieder.
 
 ### zorgverleners
 
