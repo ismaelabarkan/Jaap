@@ -37,7 +37,7 @@ COPY packages/frontend/nginx.conf.template /etc/nginx/templates/nginx.conf.templ
 
 # Copy entrypoint script
 COPY packages/frontend/entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+RUN sed -i 's/\r$//' /entrypoint.sh && chmod +x /entrypoint.sh
 
 # Expose port
 EXPOSE 80

@@ -11,7 +11,6 @@ import {
 	watch,
 } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import FeedbackDialog from "@/components/FeedbackDialog.vue";
 import { useApi } from "@/composables/useApi";
 
 const route = useRoute();
@@ -28,25 +27,23 @@ const translations = {
 		languageToggle: "Liever in het nederlands",
 		loading: "Loading...",
 		error: "An error occurred. Please try again.",
-		feedbackButton: "Give feedback",
 	},
 	nl: {
-		emptyState: `Welkom! Ik ben __Jaap Junior__, een __AI-assistent__.
+		emptyState: `Welkom! Ik ben __Assistent Berichtenverkeer & Zorgadministratie__, een __AI-assistent__.
 
-Ik help met vragen over __correct gebruik van het iJw-berichtenverkeer__ en de __iStandaard iJw__.
+Ik help met vragen over __correct gebruik van het berichtenverkeer__ en de __iStandaarden__.
 
-__Let op (testfase)__: mijn antwoorden kunnen onjuist of onvolledig zijn. __Controleer__ ze altijd aan de hand van je beleid/bronpagina’s.
+Mijn antwoorden kunnen onjuist of onvolledig zijn. __Controleer__ ze altijd aan de hand van je beleid/bronpagina's.
 
 __Geen privacygegevens delen__ (bijv. namen cliënten, BSN, dossierdetails).
 
-__Fout of twijfel?__ Neem contact op met het __Ketenbureau i-Sociaal Domein__.`,
+__Fout of twijfel?__ Neem contact op met het <a href="https://i-sociaaldomein.nl/contact/" target="_blank" rel="noopener noreferrer"><strong>Ketenbureau i-Sociaal Domein</strong></a>.`,
 		inputPlaceholder: "Typ hier je vraag...",
 		sendButton: "Versturen",
 		sendButtonHasToPick: "Kies eerst welk bericht je voorkeur heeft",
 		languageToggle: "Switch to English",
 		loading: "Bezig met laden",
 		error: "Er is een fout opgetreden. Probeer het opnieuw.",
-		feedbackButton: "Feedback geven",
 	},
 };
 
@@ -73,7 +70,6 @@ const selectedMode = ref<Modes>("rate");
 const selectedModel = ref<Exclude<AllowedModels, "rate"> | undefined>();
 const isReceivingMessage = ref(false);
 const error = ref<string | null>(null);
-const showFeedbackDialog = ref(false);
 const messagesContainer = useTemplateRef("messagesContainer");
 
 const hasToPickMessage = computed(() => {
@@ -105,18 +101,14 @@ onMounted(async () => {
 		dots.value = ".".repeat(count);
 	}, 500);
 
-	// Fetch available agents and default agent
+	// Hardcoded agents list (instead of fetching from api)
 	if (canSelectAgent) {
-		try {
-			const response = await api.agents.$get();
-			if (response.ok) {
-				const data = await response.json();
-				availableAgents.value = data.agents;
-				selectedAgent.value = data.defaultAgent;
-			}
-		} catch (e) {
-			console.error("Failed to fetch agents:", e);
-		}
+		availableAgents.value = [
+			{ id: "jw", label: "JW" },
+			{ id: "wmo", label: "WMO" },
+			{ id: "cs-wmo", label: "CS-WMO" },
+		];
+		selectedAgent.value = "jw";
 	}
 
 	const id = route.params.id as string;
@@ -301,7 +293,10 @@ watch(
 					class="logo ketenbureau-logo w-48"
 				/>
 
-                <span v-html="marked(config.emptyState, { async: false })"></span>
+				<span
+					class="markdown-content"
+					v-html="marked(config.emptyState, { async: false })"
+				></span>
 			</div>
 
 			<template v-for="(messageOrMessagePair, index) in messages" :key="index">
@@ -351,7 +346,6 @@ watch(
 			:can-select-agent="canSelectAgent"
 			:available-agents="availableAgents"
 			@submit="sendMessage"
-			@feedback="showFeedbackDialog = true"
 			autofocus
 			:disabled="isSendDisabled"
 			:loading="isReceivingMessage"
@@ -359,14 +353,7 @@ watch(
 			:sendButton="
 				hasToPickMessage ? config.sendButtonHasToPick : config.sendButton
 			"
-			:feedbackButton="config.feedbackButton"
 			class="bottom-0 fixed self-center"
-		/>
-
-		<FeedbackDialog
-			:open="showFeedbackDialog"
-			:messages="messages"
-			@close="showFeedbackDialog = false"
 		/>
 	</div>
 </template>
@@ -499,7 +486,7 @@ watch(
 	color: var(--primary-foreground);
 	max-width: 70%;
 	border-bottom-right-radius: 4px;
-    scroll-margin-top: 20px;
+	scroll-margin-top: 20px;
 }
 
 .response-message {

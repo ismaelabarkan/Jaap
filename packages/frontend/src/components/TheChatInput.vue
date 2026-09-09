@@ -5,7 +5,6 @@ import { nextTick, ref, useTemplateRef, watch } from "vue";
 defineProps<{
 	placeholder: string;
 	sendButton: string;
-	feedbackButton: string;
 	loading: boolean;
 	disabled: boolean;
 	canSelectAgent: boolean;
@@ -60,7 +59,6 @@ watch(
 
 const emit = defineEmits<{
 	submit: [];
-	feedback: [];
 }>();
 
 function focus() {
@@ -162,15 +160,6 @@ const resetItems = ref<DropdownMenuItem[]>([
 					size="xs"
 					:content="{ align: 'end' }"
 				/>
-				<UButton
-					@click="emit('feedback')"
-					class="rounded-full"
-					variant="outline"
-					icon="i-lucide-message-square"
-					size="sm"
-				>
-					{{ feedbackButton }}
-				</UButton>
 				<UButton @click="emit('submit')" class="rounded-full" :disabled>
 					{{ sendButton }}
 				</UButton>

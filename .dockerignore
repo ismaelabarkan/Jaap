@@ -1,0 +1,6 @@
+﻿image-inhoud/
+werkende-bestanden/
+
+**/.env
+**/node_modules
+**/*.backup

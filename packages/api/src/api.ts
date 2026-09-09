@@ -1,7 +1,6 @@
 import { vValidator } from "@hono/valibot-validator";
 import { Hono, type MiddlewareHandler } from "hono";
 import { bearerAuth } from "hono/bearer-auth";
-import { except } from "hono/combine";
 import { HTTPException } from "hono/http-exception";
 import type { JwtVariables } from "hono/jwt";
 import { jwt } from "hono/jwt";
@@ -135,6 +134,27 @@ const myBearerAuth = bearerAuth({
 	token: getEnvOrThrow("API_TOKEN"),
 });
 
+// LET OP: authMiddleware wordt op dit moment nergens toegepast.
+// De login is uitgeschakeld; alle endpoints zijn vrij toegankelijk.
+// Om de beveiliging terug te zetten: plaats het .use()-blok terug
+// direct onder `new Hono<{ Variables: Variables }>()` hieronder.
+//
+//	.use(
+//		"/*",
+//		except(
+//			[
+//				"/api/v1",
+//				"/api/v1/auth",
+//				"/api/v1/picks",
+//				"/api/v1/responses",
+//				"/api/v1/feedback",
+//			],
+//			authMiddleware,
+//		),
+//	)
+//
+// en zet de import terug: import { except } from "hono/combine";
+// biome-ignore lint/correctness/noUnusedVariables: bewaard om de login later terug te kunnen zetten
 const authMiddleware: MiddlewareHandler = (ctx, next) => {
 	const credentials = ctx.req.raw.headers.get("Authorization");
 	if (!credentials) {
@@ -160,19 +180,6 @@ const authMiddleware: MiddlewareHandler = (ctx, next) => {
 };
 
 export const api = new Hono<{ Variables: Variables }>()
-	.use(
-		"/*",
-		except(
-			[
-				"/api/v1",
-				"/api/v1/auth",
-				"/api/v1/picks",
-				"/api/v1/responses",
-				"/api/v1/feedback",
-			],
-			authMiddleware,
-		),
-	)
 	.get("/", (c) => {
 		return c.text("OK");
 	})
